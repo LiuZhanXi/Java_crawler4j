@@ -3,6 +3,3 @@ spring:
     name: CRAWLER4J
   artemis:
     port: 8081
-logging:
-  level:
-    org.liuzhanxi: info

@@ -5,7 +5,7 @@ import edu.uci.ics.crawler4j.crawler.CrawlController;
 import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
-import org.liuzhanxi.service.Crawler;
+import org.liuzhanxi.service.CrawlerService;
 
 
 /**
@@ -18,7 +18,7 @@ import org.liuzhanxi.service.Crawler;
 public class CrawlerController {
     public static void main(String[] args) throws Exception {
         String crawlStorageFolder = "D:\\crawler4j";
-        int numberOfCrawlers = 7;
+        int numberOfCrawlers = 1;
 
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
@@ -37,11 +37,10 @@ public class CrawlerController {
         controller.addSeed("https://www.ics.uci.edu/");
 
         // The factory which creates instances of crawlers.
-        CrawlController.WebCrawlerFactory<Crawler> factory = Crawler::new;
+        CrawlController.WebCrawlerFactory<CrawlerService> factory = CrawlerService::new;
 
         // Start the crawl. This is a blocking operation, meaning that your code
         // will reach the line after this only when crawling is finished.
-        controller.getCrawlersLocalData();
         controller.start(factory, numberOfCrawlers);
     }
 }

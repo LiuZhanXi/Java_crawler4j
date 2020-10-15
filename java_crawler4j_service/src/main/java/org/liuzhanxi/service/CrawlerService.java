@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  * Author:     LiuZhanXi
  */
 @Slf4j
-public class Crawler extends WebCrawler {
+public class CrawlerService extends WebCrawler {
     private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg"
             + "|png|mp3|mp4|zip|gz))$");
 
@@ -31,17 +31,17 @@ public class Crawler extends WebCrawler {
     @Override
     public void visit(Page page) {
         String url = page.getWebURL().getURL();
-        System.out.println("URL: " + url);
+        logger.info("URL: " + url);
 
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
             String text = htmlParseData.getText();
+            String title = htmlParseData.getTitle();
+            logger.info(title);
             String html = htmlParseData.getHtml();
             Set<WebURL> links = htmlParseData.getOutgoingUrls();
-
-            System.out.println("Text length: " + text.length());
-            System.out.println("Html length: " + html.length());
-            System.out.println("Number of outgoing links: " + links.size());
+//            logger.info(text);
+//            logger.info(html);
         }
     }
 }
